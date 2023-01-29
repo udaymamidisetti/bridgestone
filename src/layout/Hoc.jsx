@@ -8,7 +8,7 @@ const Hoc = (WComponent) => {
     return (
       <>
         <section className="flex overflow-hidden text-slate-800 bg-white h-screen">
-          <div className={` ${responsive ? "w-16" : "md:w-60 w-16 "}     `}>
+          <div className={` ${responsive ? "w-16" : "w-80"}     `}>
             <Sidebar responsive={responsive} setResponsive={setResponsive} />
           </div>
           <div

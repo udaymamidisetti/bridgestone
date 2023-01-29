@@ -9,10 +9,10 @@ const Dashboard = () => {
     <>
       <div className="tracking-wider h-full">
         {/* -----Introduction----- */}
-        <div className="flex flex-col md:w-2/3 h-full pl-10  ">
-           <Heading title="DASHBOARD"/>
-          <HeaderLayout/>
-          <StickyHeadTable/> 
+        <div className="flex flex-col h-full pl-10  ">
+          <Heading title="DASHBOARD" />
+          <HeaderLayout />
+          <StickyHeadTable />
         </div>
       </div>
     </>

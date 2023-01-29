@@ -6,14 +6,12 @@ import Form from "./NewTireRework/Form";
 const NewTireRework = () => {
   return (
     <div className="tracking-wider h-full">
-    {/* -----Introduction----- */}
-    <div className="flex flex-col md:w-2/3 h-full pl-10  ">
-    <Heading title="NEW TIRE REWORK"/>
-      <Form/>
-     
-      
+      {/* -----Introduction----- */}
+      <div className="flex flex-col h-full mt-8">
+        <Heading title="NEW TIRE REWORK" />
+        <Form />
+      </div>
     </div>
-  </div>
   );
 };
 

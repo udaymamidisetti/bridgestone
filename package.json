@@ -17,6 +17,7 @@
     "react-confirm-alert": "^3.0.6",
     "react-datepicker": "^4.8.0",
     "react-dom": "^18.2.0",
+    "react-qr-scanner": "^1.0.0-alpha.11",
     "react-query": "^3.39.2",
     "react-redux": "^8.0.5",
     "react-scripts": "5.0.1",
