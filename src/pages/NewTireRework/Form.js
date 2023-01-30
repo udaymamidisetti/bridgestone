@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRef } from "react";
 import { BiBarcodeReader } from "react-icons/bi";
 import BeforeView from "./Home/BeforeView";
@@ -9,6 +9,18 @@ const Form = () => {
   const [qrCode, setQRCode] = useState("");
   const [barscanning, setBarScanning] = useState(false);
   const [employeId, setEmployeeId] = useState(false);
+  const [shift, setShift] = useState("");
+
+  useEffect(() => {
+    const currentTime = new Date().getHours();
+    if (currentTime >= 6 && currentTime < 14) {
+      setShift("FIRST");
+    } else if (currentTime >= 14 && currentTime < 22) {
+      setShift("SECOND");
+    } else {
+      setShift("THIRD");
+    }
+  }, []);
 
   const barcodeRef = useRef(null);
   const employeeRef = useRef(null);
@@ -57,13 +69,7 @@ const Form = () => {
 
   return (
     <>
-      <div
-        className="border-2 h-5/6 ml-7 mr-7 mt-12 pt-5"
-        style={{ boxShadow: "4px 4px 9px 0px #00000029", borderWidth: "0px" }}
-      >
-        <button className="bg-blue hover:bg-blue text-white font-bold  w-52 h-12 m-auto block rounded">
-          <label>Scan</label>
-        </button>
+      <div className=" h-5/6 ml-7 mr-7 mt-3">
         <div className="flex items-center justify-start  h-20">
           <div className="flex items-center">
             <input
@@ -96,12 +102,12 @@ const Form = () => {
           <div className="flex items-center ml-4">
             <select
               ref={shiftRef}
-              className=" text-sm rounded-lg bg-white border border-gray w-80  p-3  "
+              className=" text-sm rounded-lg bg-white border border-gray w-80  p-3"
+              disabled
             >
-              <option selected> SELECT CURRENT SHIFT </option>
-              <option value="first">FIRST</option>
-              <option value="second">SECOND</option>
-              <option value="third">THIRD</option>
+              <option value={shift}>{shift}</option>
+              <option value={shift}>{shift}</option>
+              <option value={shift}>{shift}</option>
             </select>
           </div>
         </div>
@@ -166,7 +172,10 @@ const Form = () => {
               <BeforeView />
               <BeforeView />
             </div>
-            <button className="bg-blue hover:bg-blue text-white font-bold  w-64 h-16 m-auto block rounded">
+            <button
+              style={{ margin: "auto" }}
+              className="bg-blue hover:bg-blue text-white font-bold  w-64 h-16 m-auto block rounded"
+            >
               <label>SUBMIT</label>
             </button>
           </div>
@@ -181,7 +190,10 @@ const Form = () => {
               <BeforeView />
               <BeforeView />
             </div>
-            <button className="bg-blue hover:bg-blue text-white font-bold  w-64 h-16 m-auto block rounded">
+            <button
+              style={{ margin: "auto" }}
+              className="bg-blue hover:bg-blue text-white font-bold  w-64 h-16 m-auto block rounded"
+            >
               <label>SUBMIT</label>
             </button>
           </div>

@@ -174,7 +174,7 @@ const Reports = () => {
                 <TableCell>No</TableCell>
                 <TableCell>Barcode </TableCell>
                 <TableCell>Employe ID</TableCell>
-                <TableCell>REWORK TYPE</TableCell>
+                <TableCell>Rework Type</TableCell>
                 <TableCell>Rework date & Time</TableCell>
                 <TableCell>2C O/P Details</TableCell>
                 <TableCell>2C Done Date & Time</TableCell>
@@ -195,7 +195,7 @@ const Reports = () => {
                     <TableCell>{row.opdetails}</TableCell>
                     <TableCell>{row.donedata}</TableCell>
                     <TableCell>{row.svdetails}</TableCell>
-                    <TableCell>{row.reworkdatetime}</TableCell>
+                    <TableCell>{row.remark}</TableCell>
                   </TableRow>
                 ))}
             </TableBody>

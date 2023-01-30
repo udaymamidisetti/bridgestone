@@ -157,44 +157,55 @@ export default function StickyHeadTable() {
 
   return (
     <>
-      <div className="mb-8">
+      <div className="mb-8 mt-5">
         {/* Date pickers */}
 
-        <label className="ml-8">Start Date</label>
-        <label className="ml-24">End Date</label>
-        <div className=" flex items-center w-40 gap-4">
-          <DatePicker
-            className="border  w-40 border-black text-center rounded-2xl p-2 "
-            selected={startDate}
-            selectsStart
-            startDate={startDate}
-            endDate={endDate}
-            onChange={(date) => setStartDate(date)}
-          />
-          <DatePicker
-            className="border  w-40 border-black text-center rounded-2xl p-2 "
-            selected={endDate}
-            selectsEnd
-            startDate={startDate}
-            endDate={endDate}
-            minDate={startDate}
-            onChange={(date) => setEndDate(date)}
-          />
-          <div className="flex items-center ml-4">
-            <select className=" text-sm rounded-lg bg-white text-black border border-black w-50  p-3  ">
-              <option selected> SELECT STATUS </option>
-              <option value="first">DONE</option>
-              <option value="second">PENDING</option>
+        <div className="flex items-center gap-4">
+          <div>
+            <label>Search</label>
+            <br />
+            <input className="border w-60 h-10 border-black text-center rounded p-2 " />
+          </div>
+          <div>
+            <label className="">From</label>
+            <DatePicker
+              className="border h-10 w-40 border-black text-center rounded p-2 "
+              selected={startDate}
+              selectsStart
+              startDate={startDate}
+              endDate={endDate}
+              onChange={(date) => setStartDate(date)}
+            />
+          </div>
+          <div>
+            <label className="">To</label>
+            <DatePicker
+              className="border h-10 w-40 border-black text-center rounded p-2 "
+              selected={endDate}
+              selectsEnd
+              startDate={startDate}
+              endDate={endDate}
+              minDate={startDate}
+              onChange={(date) => setEndDate(date)}
+            />
+          </div>
+          <div className="flex items-center ml-4 mt-auto">
+            <select className="h-10 text-sm rounded-lg bg-white text-black border border-black w-56">
+              <option selected>Filter</option>
             </select>
           </div>
-          <div className="flex items-center ml-4">
-            <select className=" text-sm rounded-lg bg-white text-black border border-black w-50  p-3  ">
-              <option selected> SELECT SHIFT </option>
-              <option value="first">FIRST</option>
-              <option value="second">SECOND</option>
-              <option value="second">THIRD</option>
-            </select>
-          </div>
+          <button
+            style={{ width: "83px" }}
+            className="bg-blue hover:bg-blue text-white font-bold w-50 h-10 rounded mt-auto block"
+          >
+            View
+          </button>
+          <button
+            style={{ width: "83px" }}
+            className="bg-blue hover:bg-blue text-white font-bold w-50 h-10 rounded mt-auto block"
+          >
+            Export
+          </button>
         </div>
         {/* <form>
           
@@ -204,7 +215,7 @@ export default function StickyHeadTable() {
         </form> */}
       </div>
 
-      <Paper sx={{ width: "1000px", overflow: "hidden" }}>
+      <Paper sx={{ width: "100%", overflow: "hidden" }}>
         {/* Modal */}
         <Modal
           open={open}
@@ -280,7 +291,7 @@ export default function StickyHeadTable() {
         </Modal>
 
         {/*Rework Table */}
-        <TableContainer className="sticky">
+        <TableContainer className="sticky w-full">
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
               <TableRow

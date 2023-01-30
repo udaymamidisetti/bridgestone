@@ -19,7 +19,7 @@ const RoutesData = () => {
         <Route
           exact={true}
           path={"/"}
-          // name={"Dashboard"}
+          name={"Dashboard"}
           element={
             <Suspense fallback={<Loader />}>
               <Dashboard />

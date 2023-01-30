@@ -7,10 +7,7 @@ function Heading({ title }) {
   return (
     <div className="px-2 flex gap-2 items-center">
       {/* <IoArrowBackCircleSharp onClick={()=>navigate(-1)} className="cursor-pointer"/> */}
-      <h1
-        className="text-large font-bold text-center m-auto"
-        style={{ color: "#004c84" }}
-      >
+      <h1 className="text-large font-bold ml-7" style={{ color: "#000000" }}>
         {title}
       </h1>
       <hr />

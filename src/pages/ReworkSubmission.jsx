@@ -7,7 +7,7 @@ const ReworkSubmission = () => {
   return (
     <div className="tracking-wider h-full">
       {/* -----Introduction----- */}
-      <div className="flex flex-col h-full pl-10  ">
+      <div className="flex flex-col h-full mt-5">
         <Heading title="REWORK SUBMISSION" />
         <Form />
       </div>

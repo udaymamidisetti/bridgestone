@@ -23,10 +23,10 @@ const NavBar = () => {
   return (
     <>
       <nav
-        className="sticky top-0 z-1 bg-white border-b-2"
+        className=" top-0 z-1 bg-white border-b-2 h-20"
         Style="
        width:full;
-       margin-left:10px;
+       padding-left:10px;
        display:flex;
        align:center;
        justify-content:space-between;
@@ -43,7 +43,12 @@ const NavBar = () => {
 
         <span className="flex justify-content-space-between top-0 sticky items-center">
           {" "}
-          <label className="pr-3">SuperAdmin</label>
+          <label
+            className="pr-3"
+            style={{ color: "#004C84", fontWeight: "500" }}
+          >
+            SuperAdmin
+          </label>
           <span className="pr-3 text-white text-small cursor-pointer underline">
             {" "}
             <Avatar alt="remy sharp" src={profile} />

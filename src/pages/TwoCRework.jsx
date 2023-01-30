@@ -8,7 +8,7 @@ const TwoCRework = () => {
     <>
       <div className="tracking-wider h-full">
         {/* -----Introduction----- */}
-        <div className="flex flex-col h-full pl-10">
+        <div className="flex flex-col h-full pl-5 pr-5 mt-5">
           <Heading title="2C REWORK" />
 
           <StickyHeadTable />
