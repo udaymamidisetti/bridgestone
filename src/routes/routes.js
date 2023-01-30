@@ -1,16 +1,15 @@
 import { lazy } from "react";
 
 const Dashboard = lazy(() => import("../pages/Dashboard"));
-const NewTireRework=lazy(()=>import("../pages/NewTireRework"));
-const ReworkSubmission=lazy(()=>import("../pages/ReworkSubmission"))
-const TwoCRework=lazy(()=>import("../pages/TwoCRework"))
-const UserManagement=lazy(()=>import("../pages/UserManagement"))
-const Reports =lazy(()=>import("../pages/Reports"))
-
+const NewTireRework = lazy(() => import("../pages/NewTireRework"));
+const ReworkSubmission = lazy(() => import("../pages/ReworkSubmission"));
+const TwoCRework = lazy(() => import("../pages/TwoCRework"));
+const UserManagement = lazy(() => import("../pages/UserManagement"));
+const Reports = lazy(() => import("../pages/Reports"));
 
 const configureRoute = [
   {
-    path: "/dashboard",
+    path: "/",
     exact: true,
     element: <Dashboard />,
     private: true,
@@ -18,7 +17,7 @@ const configureRoute = [
   {
     path: "/newtirerework",
     exact: true,
-    element: <NewTireRework/>,
+    element: <NewTireRework />,
     private: true,
   },
   {
@@ -30,21 +29,21 @@ const configureRoute = [
   {
     path: "/twocrework",
     exact: true,
-    element: <TwoCRework/>,
+    element: <TwoCRework />,
     private: true,
   },
   {
     path: "/usermanagement",
     exact: true,
-    element: <UserManagement/>,
+    element: <UserManagement />,
     private: true,
   },
   {
     path: "/reports",
     exact: true,
-    element: <Reports/>,
+    element: <Reports />,
     private: true,
-  }
+  },
 ];
 
 export default configureRoute;

@@ -1,41 +1,40 @@
-import { MdDashboard, } from "react-icons/md";
-import  {TbReport} from 'react-icons/tb'
-import {FiUsers} from 'react-icons/fi'
-import {GiFlatTire} from 'react-icons/gi'
-import {GiTireIron} from 'react-icons/gi'
-
+import { MdDashboard } from "react-icons/md";
+import { TbReport } from "react-icons/tb";
+import { FiUsers } from "react-icons/fi";
+import { GiFlatTire } from "react-icons/gi";
+import { GiTireIron } from "react-icons/gi";
 
 const Links = [
   {
     name: "Dashboard",
-    path: "/dashboard",
-    icon: <MdDashboard/>,
+    path: "/",
+    icon: <MdDashboard />,
   },
   {
     name: "New Tire Rework",
     path: "/newtirerework",
-    icon: <GiFlatTire/>,
+    icon: <GiFlatTire />,
   },
   {
     name: "Rework Submission",
     path: "/reworksubmission",
-    icon: <GiFlatTire/>,
+    icon: <GiFlatTire />,
   },
   {
     name: "2C Rework",
     path: "/twocrework",
-    icon: <GiTireIron/>,
+    icon: <GiTireIron />,
   },
   {
     name: "User Management",
     path: "/usermanagement",
-    icon: <FiUsers/>,
+    icon: <FiUsers />,
   },
   {
     name: "Reports",
     path: "/reports",
     icon: <TbReport />,
-  }
+  },
 ];
 
 export default Links;

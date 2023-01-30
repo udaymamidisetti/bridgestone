@@ -1,12 +1,11 @@
 import React, { Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 
-
 import configureRoute from "./routes";
 
 // loader
 import Loader from "../common/Loader";
- import Dashboard from "../pages/Dashboard";
+import Dashboard from "../pages/Dashboard";
 import NewTireRework from "../pages/NewTireRework";
 import ReworkSubmission from "../pages/ReworkSubmission";
 import TwoCRework from "../pages/TwoCRework";
@@ -16,11 +15,11 @@ import Reports from "../pages/Reports";
 const RoutesData = () => {
   return (
     <>
-       <Routes>
+      <Routes>
         <Route
           exact={true}
-          path={"/dashboard"}
-          name={"Dashboard"}
+          path={"/"}
+          // name={"Dashboard"}
           element={
             <Suspense fallback={<Loader />}>
               <Dashboard />
@@ -37,7 +36,7 @@ const RoutesData = () => {
             </Suspense>
           }
         />
-         <Route
+        <Route
           exact={true}
           path={"/reworksubmission"}
           name={"Rework Submission"}
@@ -47,7 +46,7 @@ const RoutesData = () => {
             </Suspense>
           }
         />
-         <Route
+        <Route
           exact={true}
           path={"/twocrework"}
           name={"2C rework"}
@@ -57,7 +56,7 @@ const RoutesData = () => {
             </Suspense>
           }
         />
-         <Route
+        <Route
           exact={true}
           path={"/usermanagement"}
           name={"UserManagement"}
@@ -67,7 +66,7 @@ const RoutesData = () => {
             </Suspense>
           }
         />
-         <Route
+        <Route
           exact={true}
           path={"/reports"}
           name={"Reports"}
@@ -77,10 +76,7 @@ const RoutesData = () => {
             </Suspense>
           }
         />
-      
       </Routes>
-
-      
     </>
   );
 };
