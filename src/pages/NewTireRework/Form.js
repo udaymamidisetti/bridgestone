@@ -20,7 +20,7 @@ const Form = () => {
   };
   const handleLreworkChange = (e) => {
     e.preventDefault();
-    setLreworkdiv(!barcodediv);
+    setLreworkdiv(!lreworkdiv);
   };
 
   const handleScan = (data) => {
@@ -181,7 +181,6 @@ const Form = () => {
               <BeforeView />
               <BeforeView />
             </div>
-            <div className="mb-5 p-8 border-blue text-center w-64 border-spacing-10 border"></div>
             <button className="bg-blue hover:bg-blue text-white font-bold  w-64 h-16 m-auto block rounded">
               <label>SUBMIT</label>
             </button>

@@ -134,7 +134,7 @@ const Reports = () => {
               <option value="second">THIRD</option>
             </select>
           </div>
-          <div className="flex mt-auto">
+          <div className="flex mt-auto h-11">
             <button
               style={{
                 color: "white",
