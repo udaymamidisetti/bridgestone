@@ -5,6 +5,7 @@ import configureRoute from "./routes";
 
 // loader
 import Loader from "../common/Loader";
+import Login from "../pages/Login/Login";
 import Dashboard from "../pages/Dashboard";
 import NewTireRework from "../pages/NewTireRework";
 import ReworkSubmission from "../pages/ReworkSubmission";
@@ -16,6 +17,16 @@ const RoutesData = () => {
   return (
     <>
       <Routes>
+        <Route
+          exact={true}
+          path={"/login"}
+          name={"Login"}
+          element={
+            <Suspense fallback={<Loader />}>
+              <Login />
+            </Suspense>
+          }
+        />
         <Route
           exact={true}
           path={"/"}
