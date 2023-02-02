@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Heading from "../forms/Heading";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
@@ -17,6 +17,8 @@ import { AiOutlineClose } from "react-icons/ai";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Hoc from "../layout/Hoc";
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
 const data = [
   {
@@ -43,25 +45,20 @@ const data = [
   },
 ];
 
-const style = {
-  position: "absolute",
-  top: "30%",
-  left: "60%",
-  transform: "translate(-50%, -50%)",
-  width: 700,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
-
 const Reports = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const jwtToken = Cookies.get("jwt_token");
+    if (jwtToken === undefined) {
+      return navigate("/login");
+    }
+  }, []);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
-
   const [searchEmployee, setSearchEmployee] = useState("");
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -80,13 +77,25 @@ const Reports = () => {
   };
   return (
     <>
-      <div>
-        <Heading title="Rework Summary Report" />
-      </div>
-      <div className="mt-8 mb-8 ml-8" style={{ width: "95%" }}>
+      <div></div>
+      <div className="mb-8 ml-8" style={{ width: "1039px", marginTop: "33px" }}>
         {/* Date pickers */}
-
-        <div className=" flex items-center w-40 gap-4">
+        <h1
+          className="text-large font-bold"
+          style={{
+            color: "#000000",
+            fontSize: "26px",
+            fontWeight: "bold",
+            lineHeight: "39px",
+            marginBottom: "5px",
+          }}
+        >
+          Rework Summary Report
+        </h1>
+        <div
+          className=" flex items-center gap-4 justify-between"
+          style={{ width: "1039px" }}
+        >
           <div>
             <label className="">From</label>
 
@@ -112,7 +121,7 @@ const Reports = () => {
             />
           </div>
           <div>
-            <label for="employeID">Employee ID</label>
+            <label htmlFor="employeID">Employee ID</label>
             <br />
             <input
               id="employeID"
@@ -121,14 +130,20 @@ const Reports = () => {
           </div>
           <div className="flex items-center justify-center mt-auto">
             <select className=" text-sm rounded-lg bg-white text-black border border-black w-48 h-11 p-3  ">
-              <option selected> Rework Type </option>
+              <option value="type" selected>
+                {" "}
+                Rework Type{" "}
+              </option>
               <option value="first">DONE</option>
               <option value="second">PENDING</option>
             </select>
           </div>
           <div className="flex items-center justify-center mt-auto">
             <select className=" text-sm rounded-lg bg-white text-black border border-black w-48 h-11 p-3">
-              <option selected> All Shift </option>
+              <option value="shift" selected>
+                {" "}
+                All Shift{" "}
+              </option>
               <option value="first">FIRST</option>
               <option value="second">SECOND</option>
               <option value="second">THIRD</option>
@@ -158,7 +173,7 @@ const Reports = () => {
       </div>
 
       {/*Rework Table */}
-      <div style={{ marginLeft: "30px", width: "95%" }}>
+      <div className="ml-8" style={{ width: "1043px" }}>
         <TableContainer className="sticky">
           <Table stickyHeader aria-label="sticky table">
             <TableHead>

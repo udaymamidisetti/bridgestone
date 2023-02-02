@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -15,6 +15,7 @@ import Modal from "@mui/material/Modal";
 import { AiOutlineClose } from "react-icons/ai";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import Cookies from "js-cookie";
 
 const data = [
   {
@@ -137,7 +138,7 @@ export default function StickyHeadTable() {
 
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
-
+  const [results, setResults] = useState([]);
   const [searchEmployee, setSearchEmployee] = useState("");
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -146,6 +147,11 @@ export default function StickyHeadTable() {
   const handleChange = (e) => {
     setSearchEmployee(e.target.value);
   };
+
+  const filteredEmployees = data.filter((number) =>
+    number.barcodenumber.includes(searchEmployee)
+  );
+
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -155,16 +161,49 @@ export default function StickyHeadTable() {
     setPage(0);
   };
 
+  const reworkdata = async () => {
+    const jwtToken = Cookies.get("jwt_token");
+    try {
+      const Api = `https://bridgestone-backend.project-test.online/api/rework/`;
+      const options = {
+        headers: {
+          Authorization: `Bearer ${jwtToken}`,
+          token: jwtToken,
+        },
+        method: "GET",
+      };
+      const response = await fetch(Api, options);
+      const json = await response.json();
+      console.log(json);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    reworkdata();
+  }, []);
+
   return (
     <>
-      <div className="mb-8 mt-5">
+      <div className="mb-8 mt-3">
         {/* Date pickers */}
+        <h1
+          className="text-large font-bold"
+          style={{ color: "#000000", marginBottom: "11px" }}
+        >
+          2C Rework
+        </h1>
 
         <div className="flex items-center gap-4">
           <div>
             <label>Search</label>
             <br />
-            <input className="border w-60 h-10 border-black text-center rounded p-2 " />
+            <input
+              className="border w-60 h-10 border-black text-center rounded p-2 "
+              onChange={handleChange}
+              value={searchEmployee}
+            />
           </div>
           <div>
             <label className="">From</label>
@@ -291,69 +330,74 @@ export default function StickyHeadTable() {
         </Modal>
 
         {/*Rework Table */}
-        <TableContainer className="sticky w-full">
-          <Table stickyHeader aria-label="sticky table">
-            <TableHead>
-              <TableRow
-                sx={{
-                  "& th": {
-                    color: "white",
-                    backgroundColor: "#004C84",
-                  },
-                }}
-              >
-                <TableCell>No</TableCell>
-                <TableCell>Barcode </TableCell>
-                <TableCell>EmployeeID</TableCell>
-                <TableCell>START TIME</TableCell>
-                <TableCell>REWORK TYPE</TableCell>
-                <TableCell>END TIME</TableCell>
-                <TableCell>STATUS</TableCell>
-                <TableCell>2C STATUS</TableCell>
-                <TableCell>ACTONS</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {data
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row, index) => (
-                  <TableRow key={index}>
-                    <TableCell> {row.id}</TableCell>
-                    <TableCell>{row.barcodenumber}</TableCell>
-                    <TableCell>{row.employeeid}</TableCell>
-                    <TableCell>{row.starttime}</TableCell>
-                    <TableCell>{row.reworktype}</TableCell>
-                    <TableCell>{row.endtime}</TableCell>
-                    <TableCell>
-                      {row.status == "true" ? (
-                        <label className="bg-green text-white border border-red text-xs p-1  rounded-3xl">
-                          Done
-                        </label>
-                      ) : (
-                        <label className="bg-red-600 p-1  rounded-3xl text-xs text-white ">
-                          Pending
-                        </label>
-                      )}
-                    </TableCell>
-                    <TableCell>
-                      {row.twocstatus == "false" ? (
-                        <label className="bg-red-600 text-white text-xs rounded-3xl p-1">
-                          Pending
-                        </label>
-                      ) : (
-                        ""
-                      )}
-                    </TableCell>
-                    <TableCell align="right">
-                      <button className="cursor-pointer " onClick={handleOpen}>
-                        <IoImagesOutline />
-                      </button>
-                    </TableCell>
-                  </TableRow>
-                ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
+        <div style={{ boxShadow: "4px 4px 9px 0px #00000029" }}>
+          <TableContainer className="sticky w-full">
+            <Table stickyHeader aria-label="sticky table">
+              <TableHead>
+                <TableRow
+                  sx={{
+                    "& th": {
+                      color: "white",
+                      backgroundColor: "#004C84",
+                    },
+                  }}
+                >
+                  <TableCell>No</TableCell>
+                  <TableCell>Barcode </TableCell>
+                  <TableCell>EmployeeID</TableCell>
+                  <TableCell>START TIME</TableCell>
+                  <TableCell>REWORK TYPE</TableCell>
+                  <TableCell>END TIME</TableCell>
+                  <TableCell>STATUS</TableCell>
+                  <TableCell>2C STATUS</TableCell>
+                  <TableCell>ACTONS</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {filteredEmployees
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((row, index) => (
+                    <TableRow key={index}>
+                      <TableCell> {row.id}</TableCell>
+                      <TableCell>{row.barcodenumber}</TableCell>
+                      <TableCell>{row.employeeid}</TableCell>
+                      <TableCell>{row.starttime}</TableCell>
+                      <TableCell>{row.reworktype}</TableCell>
+                      <TableCell>{row.endtime}</TableCell>
+                      <TableCell>
+                        {row.status == "true" ? (
+                          <label className="bg-green text-white border border-red text-xs p-1  rounded-3xl">
+                            Done
+                          </label>
+                        ) : (
+                          <label className="bg-red-600 p-1  rounded-3xl text-xs text-white ">
+                            Pending
+                          </label>
+                        )}
+                      </TableCell>
+                      <TableCell>
+                        {row.twocstatus == "false" ? (
+                          <label className="bg-red-600 text-white text-xs rounded-3xl p-1">
+                            Pending
+                          </label>
+                        ) : (
+                          ""
+                        )}
+                      </TableCell>
+                      <TableCell align="right">
+                        <button
+                          className="cursor-pointer "
+                          onClick={handleOpen}
+                        >
+                          <IoImagesOutline />
+                        </button>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </div>
         <TablePagination
           rowsPerPageOptions={[5, 10, 15]}
           component="div"

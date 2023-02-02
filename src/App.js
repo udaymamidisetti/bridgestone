@@ -8,7 +8,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 const queryClient = new QueryClient();
 
 function App() {
- console.log(process.env.REACT_APP_BASE_URL,"process.env.REACT_APP_BASE_URL");
+  console.log(process.env.REACT_APP_BASE_URL, "process.env.REACT_APP_BASE_URL");
   return (
     <QueryClientProvider client={queryClient}>
       <ToastContainer

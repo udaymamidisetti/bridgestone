@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 import Cookies from "js-cookie";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, redirect, Navigate } from "react-router-dom";
 import axios from "axios";
 import "./Login.css";
 
 function Login() {
   const navigate = useNavigate();
-  const [username, setUsername] = useState();
+  const [email, setEmail] = useState();
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
 
   const onChangeUsername = (e) => {
-    setUsername(e.target.value);
-    console.log(username);
+    setEmail(e.target.value);
+    console.log(email);
   };
 
   const onChangePassword = (e) => {
@@ -25,7 +25,7 @@ function Login() {
       expires: 30,
       path: "/",
     });
-    navigate("/");
+    navigate("/", { replace: true });
   };
   const onSubmitFailure = (err) => {
     setMessage(err);
@@ -33,12 +33,12 @@ function Login() {
 
   const submitForm = async (e) => {
     e.preventDefault();
-    const userDetails = { username, password };
+    const userDetails = { email, password };
     const url =
       "https://bridgestone-backend.project-test.online/api/auth/login";
     const options = {
       method: "POST",
-      Headers: {
+      headers: {
         "Content-Type": "application/json",
       },
 
@@ -46,8 +46,8 @@ function Login() {
     };
     const response = await fetch(url, options);
     const data = await response.json();
-    console.log(data);
-    if (data.error === false) {
+    console.log(data.token);
+    if (data.token !== undefined) {
       onSubmitSuccess(data.token);
     } else {
       onSubmitFailure(data.message);
@@ -76,7 +76,7 @@ function Login() {
                   className="userInputField"
                   placeholder="Enter Username"
                   onChange={onChangeUsername}
-                  value={username}
+                  value={email}
                 />
               </div>
               <div className="inputContainer">
@@ -92,6 +92,11 @@ function Login() {
                   value={password}
                 />
               </div>
+              {message ? (
+                <p style={{ textAlign: "center", color: "red" }}>{message}</p>
+              ) : (
+                ""
+              )}
               <h1 className="forgotPassword">Forgot Password ?</h1>
               <button className="submitButton">Login</button>
             </div>

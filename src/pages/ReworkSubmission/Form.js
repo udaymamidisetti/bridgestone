@@ -12,6 +12,11 @@ const Form = () => {
   const [barscanning, setBarScanning] = useState(false);
   const [employeId, setEmployeeId] = useState(false);
 
+  const [code, setBarcode] = useState("");
+  const [employID, setEmployID] = useState("");
+  const [buff, setBuff] = useState("");
+  const [spot, setSpot] = useState("");
+
   const [shift, setShift] = useState("");
 
   useEffect(() => {
@@ -71,12 +76,15 @@ const Form = () => {
   };
   return (
     <>
-      <div className=" h-5/6 ml-7 mr-7">
-        <div className="flex items-center justify-around mt-2 h-24">
-          <div className="flex items-center">
+      <div className=" h-5/6 ml-7 mr-7 mt-3" style={{ width: "1043px" }}>
+        <h1 className="text-large font-bold" style={{ color: "#000000" }}>
+          Rework Submission
+        </h1>
+        <div className="flex items-center justify-between h-20">
+          <div className="flex items-center justify-between">
             <input
               ref={barcodeRef}
-              class="ml-4 px-4 py-2 border rounded"
+              class="px-4 py-2 border rounded"
               type="text"
               placeholder="Barcode"
             />
@@ -135,7 +143,10 @@ const Form = () => {
             />
           )}
         </div>
-        <div className="flex items-center justify-around h-20   w-full">
+        <div
+          className="flex items-center justify-between h-24"
+          style={{ width: "1043px" }}
+        >
           <button className="bg-blue hover:bg-blue text-white font-bold py-2 px-8 w-52 h-14 rounded">
             <label>BUFF</label>
             <input type="checkbox" name="buff" id="buff" className="ml-4" />

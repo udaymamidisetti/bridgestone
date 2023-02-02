@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Logo from "../assets/Logo.png";
 import { GoSignOut } from "react-icons/go";
 import { motion } from "framer-motion";
@@ -6,10 +6,29 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import Links from "./Links";
 import SubMenu from "./Submenu";
+import Cookies from "js-cookie";
 
 const Sidebar = ({ setResponsive, responsive }) => {
   const [pop_up, setPop_up] = useState(false);
   const navigate = useNavigate();
+  const onClickLogout = () => {
+    Cookies.remove("jwt_token");
+    console.log("success");
+    navigate("/login");
+    window.location.replace("/login");
+  };
+  useEffect(() => {
+    const handleBeforeUnload = (event) => {
+      event.preventDefault();
+      window.history.pushState({}, document.title, window.location.pathname);
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, []);
 
   return (
     <>
@@ -35,23 +54,17 @@ const Sidebar = ({ setResponsive, responsive }) => {
           })}
         </div>
         <div>
-          <motion.div
-            whileTap={{ scale: 0.5 }}
-            className="flex flex-row items-center text-center mt-40 cursor-pointer"
-          >
-            <span
-              onClick={() => {
-                localStorage.removeItem("Bridgestone|Admin");
-                localStorage.removeItem("Bridgestone|AdminInfo");
-                toast.success("LogOut Success!");
-                navigate("/");
-                setPop_up(false);
-              }}
+          <button onClick={onClickLogout}>
+            <motion.div
+              whileTap={{ scale: 0.5 }}
+              className="flex flex-row items-center text-center mt-40 cursor-pointer"
             >
-              <GoSignOut className="w-5 h-5 " />
-              <label> LogOut </label>
-            </span>
-          </motion.div>
+              <span>
+                <GoSignOut className="w-5 h-5 " />
+                <label> LogOut </label>
+              </span>
+            </motion.div>
+          </button>
         </div>
       </div>
     </>

@@ -12,7 +12,7 @@ export const WebcamCapture = () => {
   const webcamRef = React.useRef(null);
   const capture = React.useCallback(() => {
     const imageSrc = webcamRef.current.getScreenshot();
-    console.log(imageSrc);
+    console.log(image);
     setImage(imageSrc);
   }, [webcamRef, setImage]);
 
@@ -53,7 +53,7 @@ export const WebcamCapture = () => {
             className="bg-blue  text-white rounded-sm text-xl cursor-pointer mt-2"
             style={{ width: "150px" }}
           >
-            Before Capture
+            Capture
           </button>
         )}
       </div>

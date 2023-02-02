@@ -24,14 +24,14 @@ const NavBar = () => {
     <>
       <nav
         className=" top-0 z-1 bg-white border-b-2 h-20"
-        Style="
-       width:full;
-       padding-left:10px;
-       display:flex;
-       align:center;
-       justify-content:space-between;
-       align-items:center;
-       "
+        style={{
+          width: "full",
+          paddingLeft: "10px",
+          display: "flex",
+          align: "center",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
       >
         <div>
           <h3 className="flex items-center justify-between">
