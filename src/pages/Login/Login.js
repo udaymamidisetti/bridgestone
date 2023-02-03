@@ -12,12 +12,10 @@ function Login() {
 
   const onChangeUsername = (e) => {
     setEmail(e.target.value);
-    console.log(email);
   };
 
   const onChangePassword = (e) => {
     setPassword(e.target.value);
-    console.log(password);
   };
 
   const onSubmitSuccess = (jwtToken) => {
@@ -46,7 +44,6 @@ function Login() {
     };
     const response = await fetch(url, options);
     const data = await response.json();
-    console.log(data.token);
     if (data.token !== undefined) {
       onSubmitSuccess(data.token);
     } else {

@@ -22,11 +22,11 @@ const Form = () => {
   useEffect(() => {
     const currentTime = new Date().getHours();
     if (currentTime >= 6 && currentTime < 14) {
-      setShift("FIRST");
+      setShift("DAY");
     } else if (currentTime >= 14 && currentTime < 22) {
-      setShift("SECOND");
+      setShift("MID");
     } else {
-      setShift("THIRD");
+      setShift("NIGHT");
     }
   }, []);
 
@@ -143,40 +143,42 @@ const Form = () => {
             />
           )}
         </div>
-        <div
-          className="flex items-center justify-between h-24"
-          style={{ width: "1043px" }}
-        >
-          <button className="bg-blue hover:bg-blue text-white font-bold py-2 px-8 w-52 h-14 rounded">
-            <label>BUFF</label>
-            <input type="checkbox" name="buff" id="buff" className="ml-4" />
-          </button>
-          <button className="bg-blue hover:bg-blue text-white font-bold py-2 px-8 w-52 h-14 rounded">
-            <label>SPOT</label>
-            <input type="checkbox" name="buff" id="buff" className="ml-4" />
-          </button>
-          <button className="bg-blue hover:bg-blue text-white font-bold py-2 px-8 w-52 h-14 rounded">
-            <label>BARCODE</label>
-            <input
-              type="checkbox"
-              name="buff"
-              id="buff"
-              className="ml-4"
-              checked={barcodediv}
-              onChange={handleChange}
-            />
-          </button>
-          <button className="bg-blue hover:bg-blue text-white font-bold  w-52 h-14 rounded">
-            <label>LETTER REWORK</label>
-            <input
-              type="checkbox"
-              name="buff"
-              id="buff"
-              className="ml-4"
-              checked={lreworkdiv}
-              onChange={handleLreworkChange}
-            />
-          </button>
+        <div style={{ width: "100%" }}>
+          <div
+            className="flex items-center justify-between h-24"
+            style={{ width: "1043px" }}
+          >
+            <button className="bg-blue hover:bg-blue text-white font-bold py-2 px-8 w-52 h-14 rounded">
+              <label>BUFF</label>
+              <input type="checkbox" name="buff" id="buff" className="ml-4" />
+            </button>
+            <button className="bg-blue hover:bg-blue text-white font-bold py-2 px-8 w-52 h-14 rounded">
+              <label>SPOT</label>
+              <input type="checkbox" name="buff" id="buff" className="ml-4" />
+            </button>
+            <button className="bg-blue hover:bg-blue text-white font-bold py-2 px-8 w-52 h-14 rounded">
+              <label>BARCODE</label>
+              <input
+                type="checkbox"
+                name="buff"
+                id="buff"
+                className="ml-4"
+                checked={barcodediv}
+                onChange={handleChange}
+              />
+            </button>
+            <button className="bg-blue hover:bg-blue text-white font-bold  w-52 h-14 rounded">
+              <label>LETTER REWORK</label>
+              <input
+                type="checkbox"
+                name="buff"
+                id="buff"
+                className="ml-4"
+                checked={lreworkdiv}
+                onChange={handleLreworkChange}
+              />
+            </button>
+          </div>
         </div>
         {barcodediv ? (
           <div>

@@ -3,6 +3,7 @@ import { useRef } from "react";
 import { BiBarcodeReader } from "react-icons/bi";
 import BeforeView from "./Home/BeforeView";
 import QRReader from "react-qr-scanner";
+import Cookies from "js-cookie";
 const Form = () => {
   const [barcodediv, setBarcodediv] = useState(false);
   const [lreworkdiv, setLreworkdiv] = useState(false);
@@ -11,16 +12,63 @@ const Form = () => {
   const [employeId, setEmployeeId] = useState(false);
   const [shift, setShift] = useState("");
 
+  // NewTyerework details
+  const [barcode, setBarcode] = useState("asf");
+  const [employee_id, setemployee_id] = useState("asf");
+  const [start_time, setstart_time] = useState("asf");
+  const [rework_type, setrework_type] = useState("BUFF");
+  const [end_time, setend_time] = useState("afs");
+  const [status, setstatus] = useState("safsf");
+  const [before_image, setBeforeImage] = useState("asf");
+  const [after_image, setAfterImage] = useState("asf");
+  const [user, setUSer] = useState("g");
+  const [rework, setRework] = useState("df");
+
   useEffect(() => {
     const currentTime = new Date().getHours();
     if (currentTime >= 6 && currentTime < 14) {
-      setShift("FIRST");
+      setShift("DAY");
     } else if (currentTime >= 14 && currentTime < 22) {
-      setShift("SECOND");
+      setShift("MID");
     } else {
-      setShift("THIRD");
+      setShift("NIGHT");
     }
   }, []);
+
+  const postTyreWork = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const formDataObj = Object.fromEntries(formData.entries());
+    // dispatch(createSellOrder(formDataObj))
+    console.log(formDataObj);
+    return;
+    const jwtToken = Cookies.get("jwt_token");
+    const TyreWorkDetails = {
+      barcode,
+      employee_id,
+      start_time,
+      rework_type,
+      end_time,
+      status,
+      after_image,
+      before_image,
+    };
+    const url =
+      "https://bridgestone-backend.project-test.online/api/rework/?page=minim";
+    const options = {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${jwtToken}`,
+        token: jwtToken,
+        "Content-Type": "application/json",
+      },
+
+      body: JSON.stringify(TyreWorkDetails),
+    };
+    const response = await fetch(url, options);
+    const data = await response.json();
+    console.log(data);
+  };
 
   const barcodeRef = useRef(null);
   const employeeRef = useRef(null);
@@ -69,7 +117,7 @@ const Form = () => {
 
   return (
     <>
-      <div>
+      <form onSubmit={postTyreWork}>
         <div className=" h-5/6 ml-7 mr-7 mt-3" style={{ width: "1043px" }}>
           <h1 className="text-large font-bold" style={{ color: "#000000" }}>
             New Tyre Rework
@@ -143,17 +191,17 @@ const Form = () => {
           >
             <button className="bg-blue hover:bg-blue text-white font-bold py-2 px-8 w-52 h-14  rounded">
               <label>BUFF</label>
-              <input type="checkbox" name="buff" id="buff" className="ml-4" />
+              <input type="checkbox" name="BUFF" id="buff" className="ml-4" />
             </button>
             <button className="bg-blue hover:bg-blue text-white font-bold py-2 px-8 w-52 h-14 ml-6 rounded">
               <label>SPOT</label>
-              <input type="checkbox" name="buff" id="buff" className="ml-4 " />
+              <input type="checkbox" name="SPOT" id="buff" className="ml-4 " />
             </button>
             <button className="bg-blue hover:bg-blue text-white font-bold py-2 px-8 w-52 h-14 ml-6 rounded">
               <label>BARCODE</label>
               <input
                 type="checkbox"
-                name="buff"
+                name="BARCODE"
                 id="buff"
                 className="ml-4"
                 checked={barcodediv}
@@ -164,7 +212,7 @@ const Form = () => {
               <label>LETTER REWORK</label>
               <input
                 type="checkbox"
-                name="buff"
+                name="LETTER"
                 id="buff"
                 className="ml-4"
                 checked={lreworkdiv}
@@ -198,6 +246,7 @@ const Form = () => {
                 <BeforeView />
               </div>
               <button
+                type="submit"
                 style={{ margin: "auto" }}
                 className="bg-blue hover:bg-blue text-white font-bold  w-64 h-16 m-auto block rounded"
               >
@@ -208,7 +257,7 @@ const Form = () => {
             " "
           )}
         </div>
-      </div>
+      </form>
     </>
   );
 };

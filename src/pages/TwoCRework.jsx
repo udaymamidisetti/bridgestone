@@ -14,6 +14,7 @@ const TwoCRework = () => {
       return navigate("/login");
     }
   }, []);
+
   return (
     <>
       <div className="tracking-wider h-full">
